@@ -1,5 +1,5 @@
 #----------------------------------------------------------------------
-#-----------------------------------EXTRA«√O 2014
+#-----------------------------------EXTRA√á√ÉO 2012
 #----------------------------------------------------------------------
 
 
@@ -7,9 +7,23 @@
 #----------------------------------- CARREGAR PACOTE
 #----------------------------------------------------------------------
 
-#Carrega o pacote 
-require(data.table)
-require(dplyr)
+# Definir os pacotes
+
+pacotes_necessarios <- c('dplyr','data.table')
+
+# Carregar
+
+for(i in 1:length(pacotes_necessarios)){
+  if(pacotes_necessarios[i] %in% installed.packages()){
+    eval(parse(text=paste0("library(",pacotes_necessarios[i],")")))
+    cat('Pacote carregado: ',pacotes_necessarios[i],'\n')
+  } else {
+    eval(parse(text=paste0("install.packages('",pacotes_necessarios[i],"')")))
+    cat('Pacote instalado: ',pacotes_necessarios[i],'\n')
+    eval(parse(text=paste0("library(",pacotes_necessarios[i],")")))
+    cat('Pacote carregado: ',pacotes_necessarios[i],'\n')
+  }
+}
 
 #----------------------------------------------------------------------
 #-----------------------------------SET DIR
@@ -17,7 +31,7 @@ require(dplyr)
 
 dir <- choose.dir()
 setwd(dir)
-ano <- '2013'
+ano <- '2012'
 
 #----------------------------------------------------------------------
 #----------------------------------- IMPORTAR
@@ -30,7 +44,6 @@ ano <- '2013'
 # Importing
 MATRICULA_NORTE<-fread(file="MATRICULA_NORTE.csv",sep="|") 
 saveRDS(MATRICULA_NORTE,'MATRICULA_NORTE.rds')
-#norte <- MATRICULA_NORTE %>% select('NU_ANO_CENSO','TP_DEPENDENCIA','CO_UF','ID_MATRICULA','NU_IDADE','IN_MANT_ESCOLA_PRIVADA_SIST_S','TP_INGRESSO_FEDERAIS')
 remove(MATRICULA_NORTE)
 
 #----------------------------------------------------------------------
@@ -40,7 +53,6 @@ remove(MATRICULA_NORTE)
 # Importing
 MATRICULA_SUL<-fread(file="MATRICULA_SUL.csv",sep="|") 
 saveRDS(MATRICULA_SUL,'MATRICULA_SUL.rds')
-#sul <- MATRICULA_SUL %>% select('NU_ANO_CENSO','TP_DEPENDENCIA','CO_UF','ID_MATRICULA','NU_IDADE','IN_MANT_ESCOLA_PRIVADA_SIST_S','TP_INGRESSO_FEDERAIS')
 remove(MATRICULA_SUL)
 
 
@@ -51,7 +63,6 @@ remove(MATRICULA_SUL)
 # Importing
 MATRICULA_NORDESTE<-fread(file="MATRICULA_NORDESTE.csv",sep="|") 
 saveRDS(MATRICULA_NORDESTE,'MATRICULA_NORDESTE.rds') 
-#nordeste <- MATRICULA_NORDESTE %>% select('NU_ANO_CENSO','TP_DEPENDENCIA','CO_UF','ID_MATRICULA','NU_IDADE','IN_MANT_ESCOLA_PRIVADA_SIST_S','TP_INGRESSO_FEDERAIS')
 remove(MATRICULA_NORDESTE)
 
  
@@ -62,7 +73,6 @@ remove(MATRICULA_NORDESTE)
 # Importing
 MATRICULA_SUDESTE<-fread(file="MATRICULA_SUDESTE.csv",sep="|") 
 saveRDS(MATRICULA_SUDESTE,'MATRICULA_SUDESTE.rds') 
-#sudeste <- MATRICULA_SUDESTE %>% select('NU_ANO_CENSO','TP_DEPENDENCIA','CO_UF','ID_MATRICULA','NU_IDADE','IN_MANT_ESCOLA_PRIVADA_SIST_S','TP_INGRESSO_FEDERAIS')
 remove(MATRICULA_SUDESTE)
 
 
@@ -73,6 +83,5 @@ remove(MATRICULA_SUDESTE)
 # Importing
 MATRICULA_CO<-fread(file="MATRICULA_CO.csv",sep="|") 
 saveRDS(MATRICULA_CO,'MATRICULA_CO.rds') 
-#co <- MATRICULA_CO %>% select('NU_ANO_CENSO','TP_DEPENDENCIA','CO_UF','ID_MATRICULA','NU_IDADE','IN_MANT_ESCOLA_PRIVADA_SIST_S','TP_INGRESSO_FEDERAIS')
 remove(MATRICULA_CO)
 
